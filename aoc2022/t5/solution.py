@@ -5,7 +5,7 @@ from logging import getLogger
 from aocutils.debug import configure_logging, DEBUG, INFO
 from aocutils.iteration import chunkwise
 
-log = getLogger(__name__)
+log = getLogger()
 
 
 def parse(file_name):
