@@ -2,6 +2,9 @@
 import logging
 import logging.config
 
+DEBUG = 'DEBUG'
+INFO = 'INFO'
+
 
 def configure_logging(level, format="%(message)s"):
     logging.config.dictConfig({
