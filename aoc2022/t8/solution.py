@@ -73,7 +73,7 @@ class Grid(LineGrid):
 
 
 def main(input_file_name):
-    g = Grid(open(input_file_name).readlines())
+    g = Grid.from_lines(open(input_file_name).readlines(), element_op=int)
 
     answer1 = sum([
         int(g.is_visible(r, c))
