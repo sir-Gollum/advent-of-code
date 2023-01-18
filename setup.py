@@ -23,6 +23,7 @@ setup(
     packages=['aocutils'],
     package_dir={'aocutils': 'aocutils'},
     install_requires=(
-        'pytest>=3X'
+        'pytest>=3X',
+        'tqdm',
     )
 )

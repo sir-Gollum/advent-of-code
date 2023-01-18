@@ -3,6 +3,7 @@ import argparse
 import re
 from dataclasses import dataclass
 from logging import getLogger
+from tqdm import tqdm
 from aocutils.debug import configure_logging, DEBUG, INFO
 
 log = getLogger()
@@ -98,7 +99,7 @@ def main(input_file_name, is_example=False):
     answer1 = check_line(sensors, line_to_check)[1]
     answer2 = -1
 
-    for y in range(coord_limit + 1):
+    for y in tqdm(range(coord_limit + 1)):
         mr = check_line(sensors, y, is_example)[0]
         if len(mr) > 1:
             x = mr[0][1] + 1  # mr is sorted
