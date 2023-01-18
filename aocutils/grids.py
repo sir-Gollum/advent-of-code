@@ -2,6 +2,7 @@
 from typing import List, Tuple, Any
 from copy import deepcopy
 
+
 class LineGrid:
     @classmethod
     def from_lines(cls, lines, element_op=str):
