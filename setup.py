@@ -25,5 +25,13 @@ setup(
     install_requires=(
         'pytest>=3X',
         'tqdm',
+
+        # Automation to consider using if I wanted to not implement algorithms myself
+
+        # https://nographs.readthedocs.io/en/latest/
+        # 'NoGraphs'  # graph algorithms like Dijkstra, A*, BFS
+
+        # https://networkx.org/documentation/latest/tutorial.html
+        # 'networkx'  # fast network / graph algorithms, matplotlib visualizations
     )
 )
