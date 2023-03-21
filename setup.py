@@ -17,13 +17,14 @@ setup(
         'Programming Language :: Python :: 3.8',
         'Programming Language :: Python :: 3.9',
         'Programming Language :: Python :: 3.10',
+        'Programming Language :: Python :: 3.11',
         'Operating System :: OS Independent',
         'Topic :: Software Development :: Libraries'
     ],
     packages=['aocutils'],
     package_dir={'aocutils': 'aocutils'},
     install_requires=(
-        'pytest>=3X',
+        'pytest',
         'tqdm',
 
         # Automation to consider using if I wanted to not implement algorithms myself
