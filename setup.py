@@ -26,6 +26,7 @@ setup(
     install_requires=(
         'pytest',
         'tqdm',
+        'matplotlib',
 
         # Automation to consider using if I wanted to not implement algorithms myself
 
@@ -34,5 +35,8 @@ setup(
 
         # https://networkx.org/documentation/latest/tutorial.html
         # 'networkx'  # fast network / graph algorithms, matplotlib visualizations
+
+        # https://docs.sympy.org/latest/tutorials/intro-tutorial/solvers.html
+        # 'sympy'  # symbolic maths
     )
 )
