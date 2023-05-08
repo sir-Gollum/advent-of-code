@@ -4,25 +4,23 @@ from copy import deepcopy
 
 
 class LineGrid:
+
+    def __init__(self, g, rows, cols):
+        self.g = g
+        self.rows = rows
+        self.cols = cols
+
     @classmethod
-    def from_lines(cls, lines, element_op=str):
-        new = cls()
+    def from_lines(cls, lines, element_op=str, strip_lines=True):
         g = [
-            [element_op(ch) for ch in line.strip()]
+            [element_op(ch) for ch in (line.strip() if strip_lines else line)]
             for line in lines
         ]
-        new.g = g
-        new.rows = len(g)
-        new.cols = len(g[0])
-        return new
+        return cls(g, len(g), len(g[0]))
 
     @classmethod
     def from_linegrid(cls, grid):
-        new = cls()
-        new.g = deepcopy(grid.g)
-        new.rows = grid.rows
-        new.cols = grid.cols
-        return new
+        return cls(deepcopy(grid.g), grid.rows, grid.cols)
 
     def render(self, sep='', element_op=str):
         return "\n".join([
