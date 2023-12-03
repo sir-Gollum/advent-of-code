@@ -37,7 +37,7 @@ class LineGrid:
     def __repr__(self):
         return str(self)
 
-    def adjacent(self, ridx: int, cidx: int) -> List[Tuple[int, int, Any, str]]:
+    def adjacent(self, ridx: int, cidx: int, diag=False) -> List[Tuple[int, int, Any, str]]:
         """Return a list of tuples: (ridx, cidx, value, direction)
         that are adjacent the input."""
 
@@ -54,5 +54,18 @@ class LineGrid:
             
         if cidx + 1 < self.cols:
             res.append((ridx, cidx+1, self.g[ridx][cidx+1], 'r'))
-        
+
+        if diag:
+            if ridx > 0 and cidx > 0:
+                res.append((ridx - 1, cidx - 1, self.g[ridx - 1][cidx - 1], 'ul'))
+
+            if ridx > 0 and cidx + 1 < self.cols:
+                res.append((ridx - 1, cidx + 1, self.g[ridx - 1][cidx + 1], 'ur'))
+
+            if ridx + 1 < self.rows and cidx > 0:
+                res.append((ridx + 1, cidx - 1, self.g[ridx + 1][cidx - 1], 'dl'))
+
+            if ridx + 1 < self.rows and cidx + 1 < self.cols:
+                res.append((ridx + 1, cidx + 1, self.g[ridx + 1][cidx + 1], 'dr'))
+
         return res
