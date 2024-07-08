@@ -37,6 +37,14 @@ class LineGrid:
     def __repr__(self):
         return str(self)
 
+    def find(self, element: Any) -> Tuple[int, int]:
+        for ridx, row in enumerate(self.g):
+            for cidx, el in enumerate(row):
+                if el == element:
+                    return ridx, cidx
+
+        return -1, -1
+
     def adjacent(self, ridx: int, cidx: int, diag=False) -> List[Tuple[int, int, Any, str]]:
         """Return a list of tuples: (ridx, cidx, value, direction)
         that are adjacent the input."""
