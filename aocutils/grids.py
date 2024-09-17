@@ -37,6 +37,12 @@ class LineGrid:
     def __repr__(self):
         return str(self)
 
+    def get_row(self, ridx: int) -> List[Any]:
+        return self.g[ridx]
+
+    def get_col(self, cidx: int) -> List[Any]:
+        return [row[cidx] for row in self.g]
+
     def find(self, element: Any) -> Tuple[int, int]:
         for ridx, row in enumerate(self.g):
             for cidx, el in enumerate(row):
