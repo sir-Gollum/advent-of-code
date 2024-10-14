@@ -83,3 +83,6 @@ class LineGrid:
                 res.append((ridx + 1, cidx + 1, self.g[ridx + 1][cidx + 1], 'dr'))
 
         return res
+
+    def is_coord_in_grid(self, ridx: int, cidx: int) -> bool:
+        return 0 <= ridx < self.rows and 0 <= cidx < self.cols
