@@ -2,6 +2,17 @@
 from typing import List, Tuple, Any
 from copy import deepcopy
 
+OPPOSITE_DIRECTIONS = {
+    'u': 'd',
+    'd': 'u',
+    'l': 'r',
+    'r': 'l',
+    'ul': 'dr',
+    'ur': 'dl',
+    'dl': 'ur',
+    'dr': 'ul',
+}
+
 
 class LineGrid:
 
@@ -9,6 +20,7 @@ class LineGrid:
         self.g = g
         self.rows = rows
         self.cols = cols
+        self.cells = rows * cols
 
     @classmethod
     def from_lines(cls, lines, element_op=str, strip_lines=True):
@@ -21,6 +33,10 @@ class LineGrid:
     @classmethod
     def from_linegrid(cls, grid):
         return cls(deepcopy(grid.g), grid.rows, grid.cols)
+
+    @staticmethod
+    def opposite_direction(direction: str) -> str:
+        return OPPOSITE_DIRECTIONS[direction]
 
     def render(self, sep='', element_op=str):
         return "\n".join([
