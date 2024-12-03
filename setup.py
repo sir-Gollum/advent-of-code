@@ -27,6 +27,7 @@ setup(
         'pytest',
         'tqdm',
         'matplotlib',
+        'icecream',
 
         # Automation to consider using if I wanted to not implement algorithms myself
 
