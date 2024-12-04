@@ -67,36 +67,33 @@ class LineGrid:
 
         return -1, -1
 
-    def adjacent(self, ridx: int, cidx: int, diag=False) -> List[Tuple[int, int, Any, str]]:
+    def adjacent(
+            self, ridx: int, cidx: int, diag: bool = False, length: int = 1
+    ) -> List[Tuple[int, int, str, str]]:
         """Return a list of tuples: (ridx, cidx, value, direction)
         that are adjacent the input."""
 
         res = []
-        
-        if ridx > 0:
-            res.append((ridx-1, cidx, self.g[ridx-1][cidx], 'u'))
-            
-        if cidx > 0:
-            res.append((ridx, cidx-1, self.g[ridx][cidx-1], 'l'))
-        
-        if ridx + 1 < self.rows:
-            res.append((ridx+1, cidx, self.g[ridx+1][cidx], 'd'))
-            
-        if cidx + 1 < self.cols:
-            res.append((ridx, cidx+1, self.g[ridx][cidx+1], 'r'))
+
+        directions = [
+            ('u', -1, 0), ('d', 1, 0), ('l', 0, -1), ('r', 0, 1)
+        ]
 
         if diag:
-            if ridx > 0 and cidx > 0:
-                res.append((ridx - 1, cidx - 1, self.g[ridx - 1][cidx - 1], 'ul'))
+            directions.extend([
+                ('ul', -1, -1), ('ur', -1, 1), ('dl', 1, -1), ('dr', 1, 1)
+            ])
 
-            if ridx > 0 and cidx + 1 < self.cols:
-                res.append((ridx - 1, cidx + 1, self.g[ridx - 1][cidx + 1], 'ur'))
-
-            if ridx + 1 < self.rows and cidx > 0:
-                res.append((ridx + 1, cidx - 1, self.g[ridx + 1][cidx - 1], 'dl'))
-
-            if ridx + 1 < self.rows and cidx + 1 < self.cols:
-                res.append((ridx + 1, cidx + 1, self.g[ridx + 1][cidx + 1], 'dr'))
+        for direction, dr, dc in directions:
+            chars = []
+            for i in range(1, length + 1):
+                nr, nc = ridx + dr * i, cidx + dc * i
+                if self.is_coord_in_grid(nr, nc):
+                    chars.append(self.g[nr][nc])
+                else:
+                    break
+            if len(chars) == length:
+                res.append((ridx, cidx, ''.join(chars), direction))
 
         return res
 
