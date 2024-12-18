@@ -28,6 +28,7 @@ setup(
         'tqdm',
         'matplotlib',
         'icecream',
+        'pygame',
 
         # Automation to consider using if I wanted to not implement algorithms myself
 
