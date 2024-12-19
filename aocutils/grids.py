@@ -1,5 +1,5 @@
 # coding: utf-8
-from typing import List, Tuple, Any
+from typing import Any
 from copy import deepcopy
 
 OPPOSITE_DIRECTIONS = {
@@ -23,7 +23,7 @@ class LineGrid:
         self.cells = rows * cols
 
     @classmethod
-    def from_lines(cls, lines, element_op=str, strip_lines=True):
+    def from_lines(cls, lines: list[str], element_op=str, strip_lines=True):
         g = [
             [element_op(ch) for ch in (line.strip() if strip_lines else line)]
             for line in lines
@@ -31,14 +31,14 @@ class LineGrid:
         return cls(g, len(g), len(g[0]))
 
     @classmethod
-    def from_linegrid(cls, grid):
+    def from_linegrid(cls, grid: 'LineGrid'):
         return cls(deepcopy(grid.g), grid.rows, grid.cols)
 
     @staticmethod
     def opposite_direction(direction: str) -> str:
         return OPPOSITE_DIRECTIONS[direction]
 
-    def render(self, sep='', element_op=str):
+    def render(self, sep: str = '', element_op=str):
         return "\n".join([
             sep.join([element_op(ch) for ch in row])
             for row in self.g
@@ -53,23 +53,30 @@ class LineGrid:
     def __repr__(self):
         return str(self)
 
-    def get_row(self, ridx: int) -> List[Any]:
+    def get_row(self, ridx: int) -> list[Any]:
         return self.g[ridx]
 
-    def get_col(self, cidx: int) -> List[Any]:
+    def get_col(self, cidx: int) -> list[Any]:
         return [row[cidx] for row in self.g]
 
-    def find(self, element: Any) -> Tuple[int, int]:
+    def find(self, element: Any) -> tuple[int, int]:
         for ridx, row in enumerate(self.g):
             for cidx, el in enumerate(row):
                 if el == element:
                     return ridx, cidx
-
         return -1, -1
+
+    def find_all(self, element: Any) -> list[tuple[int, int]]:
+        res = []
+        for ridx, row in enumerate(self.g):
+            for cidx, el in enumerate(row):
+                if el == element:
+                    res.append((ridx, cidx))
+        return res
 
     def adjacent(
             self, ridx: int, cidx: int, diag: bool = False, length: int = 1
-    ) -> List[Tuple[int, int, str, str]]:
+    ) -> list[tuple[int, int, str, str]]:
         """Return a list of tuples: (ridx, cidx, value, direction)
         that are adjacent the input."""
 
