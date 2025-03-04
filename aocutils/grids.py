@@ -96,11 +96,11 @@ class LineGrid:
             for i in range(1, length + 1):
                 nr, nc = ridx + dr * i, cidx + dc * i
                 if self.is_coord_in_grid(nr, nc):
-                    chars.append(self.g[nr][nc])
+                    chars.append(str(self.g[nr][nc]))
                 else:
                     break
             if len(chars) == length:
-                res.append((ridx, cidx, ''.join(chars), direction))
+                res.append((ridx + dr, cidx + dc, ''.join(chars), direction))
 
         return res
 
