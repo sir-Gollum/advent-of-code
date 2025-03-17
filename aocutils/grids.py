@@ -3,14 +3,14 @@ from typing import Any
 from copy import deepcopy
 
 OPPOSITE_DIRECTIONS = {
-    'u': 'd',
-    'd': 'u',
-    'l': 'r',
-    'r': 'l',
-    'ul': 'dr',
-    'ur': 'dl',
-    'dl': 'ur',
-    'dr': 'ul',
+    "u": "d",
+    "d": "u",
+    "l": "r",
+    "r": "l",
+    "ul": "dr",
+    "ur": "dl",
+    "dl": "ur",
+    "dr": "ul",
 }
 
 
@@ -31,18 +31,15 @@ class LineGrid:
         return cls(g, len(g), len(g[0]))
 
     @classmethod
-    def from_linegrid(cls, grid: 'LineGrid'):
+    def from_linegrid(cls, grid: "LineGrid"):
         return cls(deepcopy(grid.g), grid.rows, grid.cols)
 
     @staticmethod
     def opposite_direction(direction: str) -> str:
         return OPPOSITE_DIRECTIONS[direction]
 
-    def render(self, sep: str = '', element_op=str):
-        return "\n".join([
-            sep.join([element_op(ch) for ch in row])
-            for row in self.g
-        ])
+    def render(self, sep: str = "", element_op=str):
+        return "\n".join([sep.join([element_op(ch) for ch in row]) for row in self.g])
 
     def __str__(self):
         return self.render()
@@ -75,21 +72,19 @@ class LineGrid:
         return res
 
     def adjacent(
-            self, ridx: int, cidx: int, diag: bool = False, length: int = 1
+        self, ridx: int, cidx: int, diag: bool = False, length: int = 1
     ) -> list[tuple[int, int, str, str]]:
         """Return a list of tuples: (ridx, cidx, value, direction)
         that are adjacent the input."""
 
         res = []
 
-        directions = [
-            ('u', -1, 0), ('d', 1, 0), ('l', 0, -1), ('r', 0, 1)
-        ]
+        directions = [("u", -1, 0), ("d", 1, 0), ("l", 0, -1), ("r", 0, 1)]
 
         if diag:
-            directions.extend([
-                ('ul', -1, -1), ('ur', -1, 1), ('dl', 1, -1), ('dr', 1, 1)
-            ])
+            directions.extend(
+                [("ul", -1, -1), ("ur", -1, 1), ("dl", 1, -1), ("dr", 1, 1)]
+            )
 
         for direction, dr, dc in directions:
             chars = []
@@ -100,7 +95,7 @@ class LineGrid:
                 else:
                     break
             if len(chars) == length:
-                res.append((ridx + dr, cidx + dc, ''.join(chars), direction))
+                res.append((ridx + dr, cidx + dc, "".join(chars), direction))
 
         return res
 
