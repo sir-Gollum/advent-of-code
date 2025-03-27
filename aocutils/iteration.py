@@ -28,3 +28,18 @@ def find_repeating_patterns(lst, skip_length_below=2, show_progress=False):
         pattern: indices for pattern, indices in patterns.items() if len(indices) > 1
     }
     return repeated_patterns
+
+
+def sequential_groups_of_numbers(numbers: list[int]) -> list[list[int]]:
+    groups = []
+    group = []
+    for number in sorted(numbers):
+        if not group or number == group[-1] + 1:
+            group.append(number)
+        else:
+            groups.append(group)
+            group = [number]
+
+    if group:
+        groups.append(group)
+    return groups

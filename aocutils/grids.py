@@ -21,6 +21,7 @@ class LineGrid:
         self.rows = rows
         self.cols = cols
         self.cells = rows * cols
+        self._iter_state = None
 
     @classmethod
     def from_lines(cls, lines: list[str], element_op=str, strip_lines=True):
@@ -49,6 +50,18 @@ class LineGrid:
 
     def __repr__(self):
         return str(self)
+
+    def __iter__(self):
+        it = ((r, c) for r in range(self.rows) for c in range(self.cols))
+        self._iter_state = it
+        return self
+
+    def __next__(self):
+        r, c = next(self._iter_state)
+        return r, c, self.g[r][c]
+
+    def __getitem__(self, item: int):
+        return self.g[item]
 
     def get_row(self, ridx: int) -> list[Any]:
         return self.g[ridx]
